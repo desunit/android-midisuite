@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.mobileer.example.midiscope.R;
 import com.mobileer.miditools.MidiFramer;
+import com.mobileer.miditools.MidiOutputPortAutoSelector;
 import com.mobileer.miditools.MidiOutputPortSelector;
 import com.mobileer.miditools.MidiPortWrapper;
 
@@ -44,7 +45,7 @@ public class MainActivity extends Activity implements ScopeLogger {
     private ScrollView mScroller;
     private LinkedList<String> logLines = new LinkedList<String>();
     private static final int MAX_LINES = 100;
-    private MidiOutputPortSelector mLogSenderSelector;
+    private MidiOutputPortAutoSelector mLogSenderSelector;
     private MidiManager mMidiManager;
     private MidiReceiver mLoggingReceiver;
     private MidiFramer mConnectFramer;
@@ -69,9 +70,7 @@ public class MainActivity extends Activity implements ScopeLogger {
         mConnectFramer = new MidiFramer(mLoggingReceiver);
 
         // Setup a menu to select an input source.
-        mLogSenderSelector = new MidiOutputPortSelector(mMidiManager, this,
-                R.id.spinner_senders) {
-
+        mLogSenderSelector = new MidiOutputPortAutoSelector(mMidiManager) {
             @Override
             public void onPortSelected(final MidiPortWrapper wrapper) {
                 super.onPortSelected(wrapper);

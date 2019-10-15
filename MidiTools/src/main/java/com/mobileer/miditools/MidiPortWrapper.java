@@ -55,7 +55,7 @@ public class MidiPortWrapper {
             PortInfo portInfo = findPortInfo();
             sb.append("[" + mPortIndex + "]");
             if (portInfo != null) {
-                sb.append(", ").append(portInfo.getName());
+                sb.append(", ").append(portInfo.getName() + portInfo.getType() + " " + portInfo.getPortNumber() + " " + mInfo.getOutputPortCount());
             } else {
                 sb.append(", null");
             }
